@@ -30,7 +30,6 @@ class List {
         virtual bool is_empty() = 0;
         virtual int size() = 0;
         virtual void clear() = 0;
-        virtual void precedencia() = 0;
         virtual std::string name() = 0;
 };
 

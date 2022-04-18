@@ -8,8 +8,20 @@ using namespace std;
 int main()
 {
     string expr="";
+    expr = "5 + 8 / 2";
+    cout << endl << boolalpha << check(expr); 
     expr = "(7 + 8) / 2";
-    cout << endl << check(expr); 
+    cout << endl << boolalpha << check(expr); 
+    expr = "(6 + 8) / (5 + 2)";
+    cout << endl << boolalpha << check(expr); 
+    expr = "(6 + 8) / (5 + 2) * 12";
+    cout << endl << boolalpha << check(expr); 
+    expr = "(6 + 8 / (5 + 2) * 3";
+    cout << endl << boolalpha << check(expr); 
+    expr = "(6 + 8) / (5 + 2) * 3 +";
+    cout << endl << boolalpha << check(expr); 
+    expr = "(6 + 8) 10 / (5 + 2) * 3 +";
+    cout << endl << boolalpha << check(expr); 
     cout << endl << "FINAL MAIN"; 
     /*
     string expr="";

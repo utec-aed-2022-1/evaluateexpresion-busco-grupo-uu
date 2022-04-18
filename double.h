@@ -6,8 +6,8 @@
 template <typename T>
 class DoubleList : public List<T> {
     private:
-        Node<T>* head;
-        Node<T>* tail;
+        Node<T>* head = nullptr;
+        Node<T>* tail = nullptr;
         int nodes = 0;
     public:
         DoubleList() : List<T>() {}
@@ -20,7 +20,7 @@ class DoubleList : public List<T> {
         }
 
         T back(){
-            return tail->data; 
+            return this->tail->data; 
         }
 
         void push_front(T data){
@@ -152,20 +152,20 @@ class DoubleList : public List<T> {
             this->tail = nullptr; 
             this->nodes--;
             */
-            while(true){
+            /*while(true){
                 std::cout << this->head->data;
                 if(this->head->next == nullptr){
                     break; 
                 }
                 this->pop_front();
+            }*/
+            Node<T>* hola = this->head; 
+            for(int i = 0; i < this->size(); i++){
+                std::cout << hola->data;
+                hola = hola->next; 
             }
         }
 
-        void precedencia(){
-            std::string especial = "(";
-            std::cout << "MANDRAGORA";
-
-        }
         std::string name(){
             return "DoubleList";
         }
