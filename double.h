@@ -152,13 +152,7 @@ class DoubleList : public List<T> {
             this->tail = nullptr; 
             this->nodes--;
             */
-            /*while(true){
-                std::cout << this->head->data;
-                if(this->head->next == nullptr){
-                    break; 
-                }
-                this->pop_front();
-            }*/
+            
             Node<T>* hola = this->head; 
             for(int i = 0; i < this->size(); i++){
                 std::cout << hola->data;

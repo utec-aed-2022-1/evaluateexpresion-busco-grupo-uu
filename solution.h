@@ -11,8 +11,11 @@ struct Result{
 
 Result evaluate(string input)
 {
-    // 1- descomponer el input y validar
-
+    // 1- descomponer el input y validar (3+20)*(1+3)
+    //bool err = check(input); 
+    // double result = stoi(input); 54 string -> 54 double
+    //Result.result = result;  54 
+    //Result.error = err;  True o False
     // 2- convertir de Infijo a Postfijo
     
     // 3- resolver la expresion
@@ -22,6 +25,7 @@ Result evaluate(string input)
     return Result();
 }
 
+//CONVERTIR DE INFIJO A POSTFIJO
 template <typename T>
 bool apilar(List<T>*& list, string data, List<string>*& result){
     bool correct = false; 
@@ -68,7 +72,7 @@ bool apilar(List<T>*& list, string data, List<string>*& result){
     correct = true; 
     return correct; 
 }
-
+//ULTIMOS INFIJOS A POSTFIJOS
 template <typename T>
 void add_last_operators(List<T>*& list, List<string>*& result, bool& correct){
     string poped; 
@@ -87,7 +91,7 @@ void add_last_operators(List<T>*& list, List<string>*& result, bool& correct){
         result->push_back(poped);
     }
 }
-
+//Resolver expresión
 void calculate(List<string>*& result){
     List<string> *stack_calculator = new DoubleList<string>();
     string sum = "+";
@@ -97,7 +101,6 @@ void calculate(List<string>*& result){
     double a, b;
     double res = 0;  
     while(true){
-        //if(result->front() != especial[0] && result->front() && especial[1] || result->front() && especial[2] && result->front() && especial[3]){
         if(result->front() != sum && result->front() != rest && result->front() != divi && result->front() != mult){
            stack_calculator->push_back(result->front()); 
         } else {
@@ -116,16 +119,15 @@ void calculate(List<string>*& result){
     result = stack_calculator; 
 }
 
-
-bool check(string input){
+//Leer input
+bool check(string& input){
     bool correct = true; 
     List<string> *operadores = new DoubleList<string>();
-    List<string> *numeros = new DoubleList<string>();
     List<string> *resultado = new DoubleList<string>();
     string especial = " +-/*()";
     string doubleData; 
     for (string::iterator it=input.begin(); it!=input.end(); ++it){
-        if(*it != especial[0]){
+        if(*it != especial[0]){ 
             if(especial[1] == *it || especial[2] == *it || especial[3] == *it || especial[4] == *it || especial[5] == *it || especial[6] == *it){
                 auto temp = it; 
                 if(++temp == input.end()){
@@ -155,8 +157,12 @@ bool check(string input){
         }
     }
     if(operadores->is_empty() == false) add_last_operators(operadores, resultado, correct);
-    if(correct==false) return correct;
+    if(correct==false) {
+        input = "0"; 
+        return correct;
+    }
     calculate(resultado);
-    cout << endl << "Resultado: " << resultado->front(); 
+    input = resultado->front(); 
+    cout << endl << "Resultado: " << input; 
     return correct; 
 }
