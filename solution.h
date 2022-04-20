@@ -8,23 +8,6 @@ struct Result{
     bool error;
 };
 
-
-Result evaluate(string input)
-{
-    // 1- descomponer el input y validar (3+20)*(1+3)
-    //bool err = check(input); 
-    // double result = stoi(input); 54 string -> 54 double
-    //Result.result = result;  54 
-    //Result.error = err;  True o False
-    // 2- convertir de Infijo a Postfijo
-    
-    // 3- resolver la expresion
-
-    //* Si no cumple la validacion retornar Result.error = true;
-    
-    return Result();
-}
-
 //CONVERTIR DE INFIJO A POSTFIJO
 template <typename T>
 bool apilar(List<T>*& list, string data, List<string>*& result){
@@ -104,8 +87,8 @@ void calculate(List<string>*& result){
         if(result->front() != sum && result->front() != rest && result->front() != divi && result->front() != mult){
            stack_calculator->push_back(result->front()); 
         } else {
-            a = stoi(stack_calculator->pop_back());
-            b = stoi(stack_calculator->pop_back());
+            a = stod(stack_calculator->pop_back());
+            b = stod(stack_calculator->pop_back());
             if(result->front() == sum) res = a+b; 
             else if(result->front() == rest) res = a-b; 
             else if(result->front() == divi) res = b/a;
@@ -119,8 +102,9 @@ void calculate(List<string>*& result){
     result = stack_calculator; 
 }
 
-//Leer input
-bool check(string& input){
+Result evaluate(string input)
+{
+    Result ans;
     bool correct = true; 
     List<string> *operadores = new DoubleList<string>();
     List<string> *resultado = new DoubleList<string>();
@@ -132,8 +116,9 @@ bool check(string& input){
                 auto temp = it; 
                 if(++temp == input.end()){
                     if(especial[1] == *it || especial[2] == *it || especial[3] == *it || especial[4] == *it){
-                        return correct = false; 
-                        break; 
+                        ans.error = true;
+                        ans.result = 0;
+                        return ans;
                     }
                 }
                 if(doubleData.size() != 0){
@@ -158,11 +143,12 @@ bool check(string& input){
     }
     if(operadores->is_empty() == false) add_last_operators(operadores, resultado, correct);
     if(correct==false) {
-        input = "0"; 
-        return correct;
-    }
+        ans.result = 0; 
+        ans.error = true;
+        return ans;
+    } else  ans.error = false;
     calculate(resultado);
-    input = resultado->front(); 
-    cout << endl << "Resultado: " << input; 
-    return correct; 
+    ans.result = stod(resultado->front()); 
+    cout << endl << "Resultado: " << ans.result << " Error: " << ans.error << endl; 
+    return ans;
 }

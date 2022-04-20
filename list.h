@@ -3,7 +3,6 @@
 
 #include "node.h"
 
-
 // TODO: Implement all methods
 template <typename T>
 class List {    
