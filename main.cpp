@@ -29,5 +29,9 @@ int main()
     expr = "(6 + 8) 10 / (5 + 2) * 3 +";
     ASSERT(evaluate(expr).error == true, "The function evaluate is not working");
 
+    // Test adicional
+    expr = "(7 / 2) / 2"; // Demostrar que opera doubles en cada operación
+    ASSERT(evaluate(expr).result == 1.75, "The function evaluate is not working");
+
     return  0;  
 }
